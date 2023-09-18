@@ -20,6 +20,11 @@ config :chat_app, ChatAppWeb.Endpoint,
   pubsub_server: ChatApp.PubSub,
   live_view: [signing_salt: "L11bYsAp"]
 
+# Configs for guardian
+config :chat_app, ChatApp.Guardian,
+  issuer: "chat_app",
+  secret_key: "FAcsl67vQdX4iN6cuOwTWfITirc1kEVrA3nrYkH0nIashcn9iT3G95/21fsSduY/"
+
 # Configures the mailer
 #
 # By default it uses the "Local" adapter which stores the emails

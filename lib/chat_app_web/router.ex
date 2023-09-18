@@ -14,16 +14,33 @@ defmodule ChatAppWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :auth do
+    plug ChatAppWeb.Plugs.GuardianAuthPipeline
+    plug ChatAppWeb.Plugs.AssignUser
+  end
+
+  # web without auth
   scope "/", ChatAppWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+
+    post "/session_login", Session.SessionController, :login
+    live "/login", LoginLive.Index, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", ChatAppWeb do
-  #   pipe_through :api
-  # end
+  # web with auth
+  scope "/", ChatAppWeb do
+    pipe_through [:browser, :auth]
+
+    get "/", PageController, :home
+
+  end
+
+  # api without auth
+  scope "/api", ChatAppWeb do
+    pipe_through :api
+
+  end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:chat_app, :dev_routes) do
