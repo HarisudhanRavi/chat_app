@@ -34,6 +34,7 @@ defmodule ChatAppWeb.Router do
 
     get "/", PageController, :home
 
+    live "/chat_live", ChatLive.Index, :index
   end
 
   # api without auth

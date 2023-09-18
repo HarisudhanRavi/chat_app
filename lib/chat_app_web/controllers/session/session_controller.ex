@@ -10,7 +10,7 @@ defmodule ChatAppWeb.Session.SessionController do
         ChatApp.Guardian.Plug.sign_in(conn, user)
         |> configure_session(renew: true)
         |> put_flash(:info, "Logged in successfully")
-        |> redirect(to: "/")
+        |> redirect(to: "/chat_live")
 
       {:error, reason} ->
         conn
