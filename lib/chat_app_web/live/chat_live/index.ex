@@ -10,6 +10,7 @@ defmodule ChatAppWeb.ChatLive.Index do
       socket
       |> assign(:current_user, current_user)
       |> assign(:selected_user, nil)
+      |> assign(:form_id, 1)
       |> assign(:messages, [])
       |> assign(:viewable_messages, [])
 
@@ -40,11 +41,14 @@ defmodule ChatAppWeb.ChatLive.Index do
       }
     PubSub.broadcast(ChatApp.PubSub, "messages", message)
 
+    socket =
+      socket
+      |> assign(:form_id, Enum.random(1..50))
+
     {:noreply, socket}
   end
 
   def handle_info(message, socket) do
-    IO.inspect(message, label: "recevesfaef")
     if message.sender_id == socket.assigns.current_user.id or message.receiver_id == socket.assigns.current_user.id do
 
       messages = socket.assigns.messages ++ [message]

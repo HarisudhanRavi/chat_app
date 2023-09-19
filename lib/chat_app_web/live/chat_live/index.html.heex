@@ -19,7 +19,7 @@
             <% end %>
         </div>
 
-        <.simple_form :let={f} for={%{}} as={:message} phx-submit="send_message" class="w-full p-4 border-2 border-gray-700 rounded-lg">
+        <.simple_form :let={f} for={%{}} as={:message} id={"#{@form_id}"} phx-submit="send_message" class="w-full p-4 border-2 border-gray-700 rounded-lg">
             <.input field={f[:msg_text]} label="Message"/>
 
             <:actions>
