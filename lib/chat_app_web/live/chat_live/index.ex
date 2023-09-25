@@ -9,7 +9,7 @@ defmodule ChatAppWeb.ChatLive.Index do
     socket =
       socket
       |> assign(:current_user, current_user)
-      |> assign(:selected_user, nil)
+      |> assign(:selected_user, current_user)
       |> assign(:form_id, 1)
       |> assign(:messages, [])
       |> assign(:viewable_messages, [])

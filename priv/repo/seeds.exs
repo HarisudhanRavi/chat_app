@@ -24,6 +24,12 @@ alias ChatApp.Account
 |> Account.create_user()
 
 %{
+  "username" => "nandhini",
+  "password" => "pass"
+}
+|> Account.create_user()
+
+%{
   "username" => "nobody",
   "password" => "pass"
 }

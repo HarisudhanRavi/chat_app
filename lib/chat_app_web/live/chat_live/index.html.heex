@@ -2,6 +2,7 @@
     <div class="m-4 mt-10">
         <.live_component
             id="chat-list"
+            selected_user={@selected_user}
             module={ChatAppWeb.ChatLive.ChatList}
         />
     </div>
@@ -11,11 +12,33 @@
 
         Hi <%= @current_user.username %>, You are chating with <%= @selected_user.username %>
 
-        <div class="min-h-[300px] bg-white border-gray-700 border-2 rounded-lg shadow">
+        <div class="min-h-[300px] p-4 bg-white border-gray-700 border-2 rounded-lg shadow">
             <%= for message <- @viewable_messages do %>
-                <div>
-                    <%= "#{message.sender_name}: #{message.message_string}" %>
+                <%= if message.sender_id == @current_user.id do %>
+
+                <div class="flex items-end justify-end py-1">
+                    <div class="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
+                        <div><span class="px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white "><%= message.message_string %></span></div>
+                    </div>
+
+                    <div class="relative w-6 h-6 rounded-full order-1 overflow-hidden bg-green-300">
+                        <div class="text-center text-xs pt-1"> <%= String.first(message.sender_name) |> String.capitalize() %> </div>
+                    </div>
                 </div>
+
+                <% else %>
+
+                <div class="flex items-end py-1">
+                    <div class="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
+                        <div><span class="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600"><%=  message.message_string %></span></div>
+                    </div>
+                     <div class="relative w-6 h-6 rounded-full order-1 overflow-hidden bg-green-300">
+                        <div class="text-center text-xs pt-1"> <%= String.first(message.sender_name) |> String.capitalize() %> </div>
+                    </div>
+                </div>
+
+                <% end %>
+
             <% end %>
         </div>
 
