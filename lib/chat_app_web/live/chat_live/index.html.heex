@@ -8,11 +8,13 @@
     </div>
 
     <%= if not is_nil(@selected_user) do %>
-    <div class="w-[90%] h-full">
+    <div class="w-[90%] h-full" id="chatbox" phx-hook="JsHelpers" >
 
         Hi <%= @current_user.username %>, You are chating with <%= @selected_user.username %>
 
-        <div class="min-h-[300px] p-4 bg-white border-gray-700 border-2 rounded-lg shadow">
+        <div class="h-[550px] overflow-x-hidden flex flex-col bg-white border-gray-700 border-2 rounded-lg shadow">
+
+            <div id="message-scroller" class="px-2 overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-100">
             <%= for message <- @viewable_messages do %>
                 <%= if message.sender_id == @current_user.id do %>
 
@@ -40,15 +42,22 @@
                 <% end %>
 
             <% end %>
+            </div>
+
+            <div class="mt-auto mb-8 ml-20 w-[100%]">
+                <.message_form :let={f} for={%{}} as={:message} id={""} phx-submit="send_message" class="m-0 p-0">
+
+                    <div class="flex">
+                        <div class="w-[80%]">
+                            <.input field={f[:msg_text]} autofocus/>
+                        </div>
+
+                        <.button class="h-10 mt-2 ml-2">Send</.button>
+                    </div>
+
+                </.message_form>
+            </div>
         </div>
-
-        <.simple_form :let={f} for={%{}} as={:message} id={"#{@form_id}"} phx-submit="send_message" class="w-full p-4 border-2 border-gray-700 rounded-lg">
-            <.input field={f[:msg_text]} label="Message"/>
-
-            <:actions>
-            <.button>Send</.button>
-            </:actions>
-        </.simple_form>
 
     </div>
     <% end %>
