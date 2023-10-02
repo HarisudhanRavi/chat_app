@@ -25,6 +25,7 @@ erl_crash.dump
 # Ignore package tarball (built via "mix hex.build").
 chat_app-*.tar
 
+/priv/static/
 # Ignore assets that are produced by build tools.
 /priv/static/assets/
 
