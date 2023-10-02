@@ -66,7 +66,8 @@ defmodule ChatAppWeb.ChatLive.Index do
         |> assign(:messages, messages)
         |> assign(:viewable_messages, filter_messages(messages, socket.assigns.current_user.id, socket.assigns.selected_user.id))
 
-      {:noreply, socket}
+      # {:noreply, socket}
+      {:noreply, push_event(socket, "new_message", %{sender_name: message.sender_name, message_string: message.message_string})}
     else
       {:noreply, socket}
     end
