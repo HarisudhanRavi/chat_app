@@ -33,9 +33,19 @@ defmodule ChatAppWeb.ChatLive.ChatList do
         <%= for user <- @users do %>
           <div phx-click="select_user" phx-value-user_id={user.id} class={"flex w-full h-16 pt-2 pl-2 cursor-pointer border-b-[1px]" <> selected_user_class(@selected_user, user)}>
 
-            <div class="relative w-10 h-10 overflow-hidden bg-green-300 rounded-full">
+            <div class="relative w-10 h-10  bg-gray-300 rounded-full">
                 <%!-- <svg class="absolute w-12 h-12 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg> --%>
                 <div class="text-center text-xl pt-1.5"> <%= String.first(user.username) |> String.capitalize() %> </div>
+                <svg width="20" height="20" class="absolute left-7 top-7">
+                            <circle cx="5.5" cy="5.5" r="5" stroke="white" stroke-width="1.5"
+                            fill={
+                              if user.id in @online_user_ids do
+                                "#34D399"
+                              else
+                                "red"
+                              end
+                            } />
+                </svg>
             </div>
 
             <div class="pl-3">

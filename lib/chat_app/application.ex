@@ -14,6 +14,8 @@ defmodule ChatApp.Application do
       ChatApp.Repo,
       # Start the PubSub system
       {Phoenix.PubSub, name: ChatApp.PubSub},
+      # Presence
+      ChatAppWeb.Presence,
       # Start Finch
       {Finch, name: ChatApp.Finch},
       # Start the Endpoint (http/https)
