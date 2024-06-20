@@ -1,6 +1,4 @@
 # ChatApp
-Test
-Test 2
 To start your Phoenix server:  
 
   * Run `mix setup` to install and setup dependencies
