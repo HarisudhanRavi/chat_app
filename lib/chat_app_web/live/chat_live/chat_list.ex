@@ -1,18 +1,12 @@
 defmodule ChatAppWeb.ChatLive.ChatList do
   use ChatAppWeb, :live_component
-  alias ChatApp.Account
 
   def update(assigns, socket) do
     socket =
       socket
       |> assign(assigns)
-      |> assign(:users, list_users())
 
     {:ok, socket}
-  end
-
-  defp list_users() do
-    Account.list_users()
   end
 
   defp selected_user_class(nil, _user), do: " bg-gray-100 hover:bg-gray-400"
@@ -33,13 +27,20 @@ defmodule ChatAppWeb.ChatLive.ChatList do
         <%= for user <- @users do %>
           <div phx-click="select_user" phx-value-user_id={user.id} class={"flex w-full h-16 pt-2 pl-2 cursor-pointer border-b-[1px]" <> selected_user_class(@selected_user, user)}>
 
-            <div class="relative w-10 h-10 overflow-hidden bg-green-300 rounded-full">
-                <%!-- <svg class="absolute w-12 h-12 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg> --%>
+            <div class="relative w-10 h-10 overflow-visible bg-gray-200 rounded-full">
                 <div class="text-center text-xl pt-1.5"> <%= String.first(user.username) |> String.capitalize() %> </div>
+                <%= if user.id in @online_users do %>
+                <span class="bottom-0 left-7 absolute z-100 w-2.5 h-2.5 bg-green-500 rounded-full"></span>
+                <% else %>
+                <span class="bottom-0 left-7 absolute z-100 w-2.5 h-2.5 bg-red-600 rounded-full"></span>
+                <% end %>
             </div>
 
             <div class="pl-3">
-              <div class="font-medium"><%= user.username %></div>
+              <span class="font-medium"><%= user.username %></span>
+              <%= if user == @current_user do %>
+              <span>(You)</span>
+              <% end %>
               <div class="text-xs"><%= "#{user.username}@chat.com" %></div>
             </div>
           </div>

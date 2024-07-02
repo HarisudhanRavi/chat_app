@@ -2,15 +2,25 @@
     <div class="m-4 mt-10">
         <.live_component
             id="chat-list"
+            current_user={@current_user}
             selected_user={@selected_user}
+            users={@users}
+            online_users={@online_users}
             module={ChatAppWeb.ChatLive.ChatList}
         />
     </div>
 
     <%= if not is_nil(@selected_user) do %>
     <div class="w-[90%] h-full" id="chatbox" phx-hook="JsHelpers" >
-
-        Hi <%= @current_user.username %>, You are chating with <%= @selected_user.username %>
+        
+        <div>
+            Hi <%= @current_user.username %>, You are chating with 
+            <%= if @current_user == @selected_user do %>
+            yourself
+            <% else %>
+            <%= @selected_user.username %>
+            <% end %>
+        </div>
 
         <div class="h-[550px] overflow-x-hidden flex flex-col bg-white border-gray-700 border-2 rounded-lg shadow">
 
