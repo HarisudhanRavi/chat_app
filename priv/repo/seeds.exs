@@ -12,25 +12,25 @@
 alias ChatApp.Account
 
 %{
-  "username" => "hari",
+  "username" => "chris",
   "password" => "pass"
 }
 |> Account.create_user()
 
 %{
-  "username" => "esther",
+  "username" => "tony",
   "password" => "pass"
 }
 |> Account.create_user()
 
 %{
-  "username" => "nandhini",
+  "username" => "bruce",
   "password" => "pass"
 }
 |> Account.create_user()
 
 %{
-  "username" => "nobody",
+  "username" => "odinson",
   "password" => "pass"
 }
 |> Account.create_user()
