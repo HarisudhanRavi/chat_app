@@ -10,7 +10,10 @@ To start your chat server:
   * Run `mix setup` to install and setup dependencies
   * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
 
-The chat app serves on [`localhost:4000`](http://localhost:4000/login)
+The chat app serves on: [`localhost:4000`](http://localhost:4000/login)
+
+Demo:
+<video src="https://github.com/HarisudhanRavi/chat_app/assets/64002424/7a8f7ef5-0666-4be7-a558-cf9562d68bb0" controls></video>
 
 ## Learn more
 
