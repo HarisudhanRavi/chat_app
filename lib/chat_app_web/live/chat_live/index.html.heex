@@ -11,18 +11,20 @@
     </div>
 
     <%= if not is_nil(@selected_user) do %>
-    <div class="w-[90%] h-full" id="chatbox" phx-hook="JsHelpers" >
-        
-        <div>
-            Hi <%= @current_user.username %>, You are chating with 
-            <%= if @current_user == @selected_user do %>
-            yourself
-            <% else %>
-            <%= @selected_user.username %>
-            <% end %>
+    <div class="w-[90%] mr-4 h-full" id="chatbox" phx-hook="JsHelpers" >
+        <div class="flex justify-between my-1">
+            <div>
+                Hi <%= @current_user.username %>, You are chating with 
+                <%= if @current_user == @selected_user do %>
+                yourself
+                <% else %>
+                <%= @selected_user.username %>
+                <% end %>
+            </div>
+            <.button class="h-8 w-20 pt-1 mr-0" phx-click={JS.navigate(~p"/login")}> Log Out </.button>
         </div>
 
-        <div class="h-[550px] overflow-x-hidden flex flex-col bg-white border-gray-700 border-2 rounded-lg shadow">
+        <div class="h-[550px] w-full overflow-x-hidden flex flex-col bg-white border-gray-700 border-2 rounded-lg shadow">
 
             <div id="message-scroller" class="px-2 overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-100">
             <%= for message <- @viewable_messages do %>
@@ -54,7 +56,7 @@
             <% end %>
             </div>
 
-            <div class="mt-auto mb-8 ml-20 w-[100%]">
+            <div class="mt-auto mb-8 ml-20 mr-10 max-w-[100%]">
                 <.message_form :let={f} for={%{}} as={:message} id={""} phx-submit="send_message" class="m-0 p-0">
 
                     <div class="flex">
